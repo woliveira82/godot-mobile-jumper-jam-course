@@ -1,9 +1,14 @@
 extends Node2D
 
+var camera_scene = preload("res://scenes/game_camera.tscn")
 
-# Called when the node enters the scene tree for the first time.
+var camera = null
+
+
 func _ready():
-	pass # Replace with function body.
+	camera = camera_scene.instantiate()
+	camera.setup_camera($Player)
+	add_child(camera)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
