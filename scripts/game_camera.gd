@@ -23,7 +23,7 @@ func _ready():
 	destroyer_shape.shape = rect_shape
 
 
-func _process(delta):
+func _process(_delta):
 	if player:
 		limit_bottom = min(limit_bottom, player.global_position.y + limit_distance)
 	
@@ -34,7 +34,7 @@ func _process(delta):
 				area.queue_free()
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if player:
 		global_position.y = player.global_position.y
 
