@@ -1,8 +1,10 @@
 extends Node2D
 
 var camera_scene = preload("res://scenes/game_camera.tscn")
-
 var camera = null
+
+@onready var player = $Player
+@onready var level_generator = $LevelGenerator
 
 
 func _ready():
@@ -10,7 +12,13 @@ func _ready():
 	camera.setup_camera($Player)
 	add_child(camera)
 
+	if player:
+		level_generator.setup(player)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta):
-	pass
+	if Input.is_action_just_pressed("quit"):
+		get_tree().quit()
+	
+	if Input.is_action_just_pressed("reset"):
+		get_tree().reload_current_scene()
