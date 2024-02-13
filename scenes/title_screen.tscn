@@ -1,0 +1,102 @@
+[gd_scene load_steps=7 format=3 uid="uid://bq643238kf30w"]
+
+[ext_resource type="Texture2D" uid="uid://xeetccam8kaa" path="res://assets/textures/ui/BigLogo.png" id="1_0awsb"]
+[ext_resource type="PackedScene" uid="uid://dlm8vlou3rkc7" path="res://scenes/screen_button.tscn" id="2_kfwqv"]
+[ext_resource type="Texture2D" uid="uid://878nqty2006g" path="res://assets/textures/ui/PlayBtn.png" id="3_feyjn"]
+
+[sub_resource type="Animation" id="Animation_sv4x6"]
+resource_name = "animate_play_button"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/Play:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-101.5, 50), Vector2(-101.5, 65)]
+}
+
+[sub_resource type="Animation" id="Animation_badcw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/Play:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-101.5, 50)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jk54i"]
+_data = {
+"RESET": SubResource("Animation_badcw"),
+"animate_play_button": SubResource("Animation_sv4x6")
+}
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Anchor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Logo" type="TextureRect" parent="Anchor"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -248.0
+offset_top = -348.0
+offset_right = 248.0
+offset_bottom = 148.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_0awsb")
+expand_mode = 1
+
+[node name="Play" parent="Anchor" instance=ExtResource("2_kfwqv")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -121.5
+offset_top = 30.0
+offset_right = 121.5
+offset_bottom = 270.001
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_feyjn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "animate_play_button"
+libraries = {
+"": SubResource("AnimationLibrary_jk54i")
+}
