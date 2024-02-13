@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bq643238kf30w"]
+[gd_scene load_steps=8 format=3 uid="uid://bq643238kf30w"]
 
 [ext_resource type="Texture2D" uid="uid://xeetccam8kaa" path="res://assets/textures/ui/BigLogo.png" id="1_0awsb"]
+[ext_resource type="Script" path="res://scripts/base_screen.gd" id="1_bfteg"]
 [ext_resource type="PackedScene" uid="uid://dlm8vlou3rkc7" path="res://scenes/screen_button.tscn" id="2_kfwqv"]
 [ext_resource type="Texture2D" uid="uid://878nqty2006g" path="res://assets/textures/ui/PlayBtn.png" id="3_feyjn"]
 
@@ -11,7 +12,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Anchor/Play:position")
+tracks/0/path = NodePath("Anchor/TitlePlay:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -26,7 +27,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Anchor/Play:position")
+tracks/0/path = NodePath("Anchor/TitlePlay:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -49,6 +50,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_bfteg")
 
 [node name="Anchor" type="Control" parent="."]
 layout_mode = 1
@@ -80,17 +82,17 @@ grow_vertical = 2
 texture = ExtResource("1_0awsb")
 expand_mode = 1
 
-[node name="Play" parent="Anchor" instance=ExtResource("2_kfwqv")]
+[node name="TitlePlay" parent="Anchor" instance=ExtResource("2_kfwqv")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -121.5
-offset_top = 30.0
-offset_right = 121.5
-offset_bottom = 270.001
+offset_left = -101.5
+offset_top = 50.0
+offset_right = 141.5
+offset_bottom = 290.001
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("3_feyjn")

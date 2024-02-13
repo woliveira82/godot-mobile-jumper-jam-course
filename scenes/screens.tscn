@@ -10,12 +10,16 @@
 script = ExtResource("1_xc70i")
 
 [node name="TitleScreen" parent="." instance=ExtResource("3_8cx7v")]
+visible = false
 
 [node name="PauseScreen" parent="." instance=ExtResource("3_egbxg")]
+visible = false
 
 [node name="GameOverScreen" parent="." instance=ExtResource("4_lpcms")]
+visible = false
 
 [node name="Debug" type="Control" parent="."]
+visible = false
 z_index = 4000
 layout_mode = 3
 anchors_preset = 15
@@ -23,6 +27,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="ConsoleLog" type="Control" parent="Debug" groups=["debug_console"]]
 layout_mode = 1
