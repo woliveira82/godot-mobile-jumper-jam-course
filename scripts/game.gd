@@ -29,7 +29,6 @@ func _ready():
 	setup_parallax_layer(parallax2)
 	setup_parallax_layer(parallax3)
 	
-	
 	new_game()
 
 
