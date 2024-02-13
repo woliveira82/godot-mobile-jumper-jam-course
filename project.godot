@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="godot-mobile-jumper-jam-course"
-run/main_scene="res://scenes/game.tscn"
+run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Utility="*res://scripts/utility.gd"
 
 [display]
 
