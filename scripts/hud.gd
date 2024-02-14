@@ -23,6 +23,7 @@ func _ready():
 
 
 func _on_pause_button_pressed():
+	SoundFX.play("Click")
 	pause_game.emit()
 
 
