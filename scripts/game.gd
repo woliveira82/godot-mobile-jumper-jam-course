@@ -1,5 +1,7 @@
 extends Node2D
 
+signal player_died(score, highscore)
+
 var camera_scene = preload("res://scenes/game_camera.tscn")
 var player_scene = preload("res://scenes/player.tscn")
 
@@ -14,6 +16,7 @@ var viewport_size: Vector2
 @onready var parallax1 = $ParallaxBackground/ParallaxLayer1
 @onready var parallax2 = $ParallaxBackground/ParallaxLayer2
 @onready var parallax3 = $ParallaxBackground/ParallaxLayer3
+@onready var hud = $UILayer/HUD
 
 
 func _ready():
@@ -29,7 +32,8 @@ func _ready():
 	setup_parallax_layer(parallax2)
 	setup_parallax_layer(parallax3)
 	
-	new_game()
+	hud.visible = false
+	ground_sprite.visible = false
 
 
 func _process(_delta):
@@ -41,15 +45,23 @@ func _process(_delta):
 
 
 func new_game():
+	reset_game()
+	
 	player = player_scene.instantiate()
 	player.global_position = player_spawn_position
+	player.died.connect(_on_player_died)
 	add_child(player)
+	
 	camera = camera_scene.instantiate()
 	camera.setup_camera(player)
 	add_child(camera)
 
 	if player:
 		level_generator.setup(player)
+		level_generator.start_generation()
+	
+	hud.visible = true
+	ground_sprite.visible = true
 
 
 func get_parallax_sprite_scale(parallax_sprite: Sprite2D):
@@ -66,3 +78,22 @@ func setup_parallax_layer(parallax_layer: ParallaxLayer):
 		parallax_sprite.scale = get_parallax_sprite_scale(parallax_sprite)
 		var my = parallax_sprite.scale.y * parallax_sprite.get_texture().get_height()
 		parallax_layer.motion_mirroring.y = my
+
+
+func _on_player_died():
+	hud.visible = false
+	player_died.emit(1998, 9881)
+
+
+func reset_game():
+	ground_sprite.visible = false
+	level_generator.reset_level()
+	if player:
+		player.queue_free()
+		player = null
+		level_generator.player = null
+	
+	if camera:
+		camera.queue_free()
+		camera = null
+	
