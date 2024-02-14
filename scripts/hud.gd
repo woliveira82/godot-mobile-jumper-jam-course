@@ -1,7 +1,10 @@
 extends Control
 
+signal pause_game
+
 @onready var topbar = $TopBar
 @onready var topbar_bg = $TopBarBG
+@onready var score_label = $TopBar/ScoreLabel
 
 
 func _ready():
@@ -18,5 +21,10 @@ func _ready():
 		var margin = 10
 		topbar_bg.size.y += safe_area_top + margin
 
+
 func _on_pause_button_pressed():
-	pass # Replace with function body.
+	pause_game.emit()
+
+
+func set_score(new_score: int):
+	score_label.text = str(new_score)

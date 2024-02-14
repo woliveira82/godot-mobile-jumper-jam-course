@@ -1,6 +1,7 @@
 extends Node2D
 
 signal player_died(score, highscore)
+signal pause_game
 
 var camera_scene = preload("res://scenes/game_camera.tscn")
 var player_scene = preload("res://scenes/player.tscn")
@@ -9,6 +10,9 @@ var camera = null
 var player: Player = null
 var player_spawn_position: Vector2
 var viewport_size: Vector2
+var score: int = 0
+var high_score: int = 0
+var save_file_path = "user://highscore.save"
 
 
 @onready var level_generator = $LevelGenerator
@@ -33,7 +37,11 @@ func _ready():
 	setup_parallax_layer(parallax3)
 	
 	hud.visible = false
+	hud.set_score(0)
+	hud.pause_game.connect(_on_hud_pause_game)
 	ground_sprite.visible = false
+	
+	load_score()
 
 
 func _process(_delta):
@@ -42,6 +50,10 @@ func _process(_delta):
 	
 	if Input.is_action_just_pressed("reset"):
 		get_tree().reload_current_scene()
+	
+	if player:
+		score = max(score, viewport_size.y - player.global_position.y)
+		hud.set_score(score)
 
 
 func new_game():
@@ -62,6 +74,7 @@ func new_game():
 	
 	hud.visible = true
 	ground_sprite.visible = true
+	score = 0
 
 
 func get_parallax_sprite_scale(parallax_sprite: Sprite2D):
@@ -82,11 +95,16 @@ func setup_parallax_layer(parallax_layer: ParallaxLayer):
 
 func _on_player_died():
 	hud.visible = false
-	player_died.emit(1998, 9881)
+	
+	high_score = max(high_score, score)
+	save_score()
+	player_died.emit(score, high_score)
 
 
 func reset_game():
 	ground_sprite.visible = false
+	hud.set_score(0)
+	hud.visible = false
 	level_generator.reset_level()
 	if player:
 		player.queue_free()
@@ -96,4 +114,22 @@ func reset_game():
 	if camera:
 		camera.queue_free()
 		camera = null
-	
+
+
+func save_score():
+	var file = FileAccess.open(save_file_path, FileAccess.WRITE)
+	file.store_var(high_score)
+	file.close()
+
+
+func load_score():
+	if FileAccess.file_exists(save_file_path):
+		var file = FileAccess.open(save_file_path, FileAccess.READ)
+		high_score = file.get_var()
+		file.close()
+	else:
+		high_score = 0
+
+
+func _on_hud_pause_game():
+	pause_game.emit()
