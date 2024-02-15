@@ -13,7 +13,7 @@ var viewport_size: Vector2
 var score: int = 0
 var high_score: int = 0
 var save_file_path = "user://highscore.save"
-
+var new_skin_unlocked = true
 
 @onready var level_generator = $LevelGenerator
 @onready var ground_sprite = $GroundSprite
@@ -63,6 +63,8 @@ func new_game():
 	player.global_position = player_spawn_position
 	player.died.connect(_on_player_died)
 	add_child(player)
+	if new_skin_unlocked:
+		player.use_new_skin()
 	
 	camera = camera_scene.instantiate()
 	camera.setup_camera(player)
