@@ -13,7 +13,7 @@ var viewport_size: Vector2
 var score: int = 0
 var high_score: int = 0
 var save_file_path = "user://highscore.save"
-var new_skin_unlocked = true
+var new_skin_unlocked = false
 
 @onready var level_generator = $LevelGenerator
 @onready var ground_sprite = $GroundSprite

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ct4fegnfrrj00"]
+[gd_scene load_steps=7 format=3 uid="uid://ct4fegnfrrj00"]
 
 [ext_resource type="Script" path="res://scripts/screens.gd" id="1_xc70i"]
 [ext_resource type="Texture2D" uid="uid://ebdh0nfkte80" path="res://assets/textures/ui/gear.png" id="2_ulgu7"]
 [ext_resource type="PackedScene" uid="uid://bq643238kf30w" path="res://scenes/title_screen.tscn" id="3_8cx7v"]
 [ext_resource type="PackedScene" uid="uid://b38n76vovw3h8" path="res://scenes/pause_screen.tscn" id="3_egbxg"]
 [ext_resource type="PackedScene" uid="uid://2gf1oj5577ds" path="res://scenes/game_over_screen.tscn" id="4_lpcms"]
+[ext_resource type="PackedScene" uid="uid://yrimp15i6ueo" path="res://scenes/shop_screen.tscn" id="6_tay58"]
 
 [node name="Screens" type="CanvasLayer"]
 process_mode = 3
@@ -91,5 +92,8 @@ grow_vertical = 0
 texture_normal = ExtResource("2_ulgu7")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="ShopScreen" parent="." instance=ExtResource("6_tay58")]
+visible = false
 
 [connection signal="pressed" from="Debug/ToggleConsole" to="." method="_on_toggle_console_pressed"]

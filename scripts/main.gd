@@ -4,6 +4,7 @@ var game_in_progress = false
 
 @onready var game = $Game
 @onready var screens = $Screens
+@onready var iap_manager = $IAPManager
 
 
 func _ready():
@@ -14,6 +15,7 @@ func _ready():
 	game.player_died.connect(_on_game_player_died)
 	game.pause_game.connect(_on_game_pause_game)
 
+	screens.purchase_skin.connect(_on_screens_purchase_skin)
 
 func _on_window_event(event):
 	match event:
@@ -45,3 +47,8 @@ func _on_game_player_died(score, highscore):
 func _on_game_pause_game():
 	get_tree().paused = true
 	screens.pause_game()
+
+
+func _on_screens_purchase_skin():
+	if not game.new_skin_unlocked:
+		game.new_skin_unlocked = true

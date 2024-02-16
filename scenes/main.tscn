@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcynuoolmcukq"]
+[gd_scene load_steps=5 format=3 uid="uid://bcynuoolmcukq"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_exdri"]
 [ext_resource type="PackedScene" uid="uid://qpiemyl1eabk" path="res://scenes/game.tscn" id="2_lduv4"]
 [ext_resource type="PackedScene" uid="uid://ct4fegnfrrj00" path="res://scenes/screens.tscn" id="3_3rurh"]
+[ext_resource type="PackedScene" uid="uid://mq2qb6f03u7i" path="res://scenes/iap_manager.tscn" id="4_jti4w"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_exdri")
@@ -10,3 +11,5 @@ script = ExtResource("1_exdri")
 [node name="Game" parent="." instance=ExtResource("2_lduv4")]
 
 [node name="Screens" parent="." instance=ExtResource("3_3rurh")]
+
+[node name="IAPManager" parent="." instance=ExtResource("4_jti4w")]
